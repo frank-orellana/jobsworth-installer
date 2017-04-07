@@ -164,7 +164,7 @@ replace into jobsworth.wiki_revisions(id,wiki_page_id,created_at,updated_at,body
 /* table work_logs;                              */
 replace into 
 jobsworth.work_logs(id,user_id,task_id,project_id,company_id     ,customer_id,started_at,duration,body)
-             select id,user_id,task_id,project_id,@new_company_id,customer_id,started_at,duration,body
+             select id,user_id,task_id,project_id,@new_company_id,customer_id,started_at,duration/60,body
                from clockingit.work_logs;
 
 commit;
