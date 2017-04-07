@@ -6,6 +6,8 @@ This guide shows you the steps to migrate from the hosted [clockingIT](http://ww
 2. Go to the folder migration-from-hosted
 3. Execute the migrate-from-hosted.sh (You might need to make this file executable: `chmod 776 migrate-from-hosted.sh`)
 
+The script will execute in steps (the same as below) asking you for your mysql root password. If you have any errors you can simply execute the scrpit again. It is recommended that the destination database is empty or almost empty (e.g. the example data only) so it does not present any problem.
+
 ## MANUAL MIGRATION
 ### 1. Download the SQL scripts
 First you need to download all the SQL scripts included in this folder to your server.
@@ -28,6 +30,10 @@ Now you have the schema created, you can import your data into it. If your dump 
 mysql -u root -p clockingit < my-clockingit-backup.sql
 ```
 
+Review any errors. You might have some problematic strings in it. For example if you made a comment that ends in a backslash.
+
+You should be able to execute again this steps from the beggining as many times as you like.
+
 ## 5. Execute migration SQL script
 Execute the data-migration.sql file in MySql. This will copy all the necessary data from the temporary clockingIT database to the jobsworth database. if you already have data in your database BE CAREFUL! this script might overwrite some things you don't want overwritten.
 
@@ -48,7 +54,7 @@ Login to your account. You could even login with the users you had configured in
 
 
 ## All together
-Assuming you downloaded all your files in /tmp/
+Putting it all together. Assuming you downloaded all your files in /tmp/ (including your ClockingIt backup)
 ```bash
 cd /tmp
 mysql -u root -p < schema.sql
@@ -57,8 +63,9 @@ mysql -u root -p < data-migration.sql
 ```
 
 ## Known Issues
-The script at the moment does not import:
+The import script at the moment has the following issues:
     
-    The time of the work logs might not appear correctly
-    Some widgets
+    Imported Work logs with HTML will not display correctly
+    Some widgets are not imported
+    Users passwords are lost (they are all reset to `jobsworth`)
 
