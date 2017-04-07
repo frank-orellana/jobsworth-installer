@@ -17,7 +17,8 @@ There's also a VM ready to try if you wish to download it from [Dropbox](http://
 1. Download the full project
 1. Extract the file
 1. Copy the all the files to a folder IN your server
-1. For installation execute the file: `install-jobsworth-from-scratch.sh`. The script will
+1. Move to the `jobsworth-installer` directory
+1. For installation execute the file: `sudo install-jobsworth-from-scratch.sh`. The script will
     1. Download and install MySql (It will ask you to set the root password)
     1. Create a new database named `jobsworth` and a user named `jw`
     1. Download, Install and configure Java and Tomcat9
@@ -25,10 +26,15 @@ There's also a VM ready to try if you wish to download it from [Dropbox](http://
         2. The installation path will be /opt/tomcat. For mor details see the script
     4. Download, install and configure Jobsworth
         1. After the installation is complete you can access jobsworth through http://your-ip:8080/ with the user: `admin` and password: `password`. It might take a while the first time
-1. For data migration execute the file `migration-from-hosted/migrate-from-hosted.sh` passing as first argument yor backup file
+1. For data migration execute the file `./migration-from-hosted/migrate-from-hosted.sh` passing as first argument yor backup file
     1. This will import all the data from a backup taken from your hosted version
     1. To see the full details see the [Migration Guide](https://github.com/frank-orellana/jobsworth-installer/tree/master/migration-from-hosted)
 
+The scripts need to be executable. If they are not you will have to execute this before trying to execute them:
+```bash
+chmod 775 install-jobsworth-from-scratch.sh
+chmod 775 migration-from-hosted/migrate-from-hosted.sh
+```
 
 ## Manual Installation of Jobsworth
 These tutorial will describe the steps to install jobsworth from scratch in a clean Ubuntu 16.10 Server & Desktop distro.
