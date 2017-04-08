@@ -1,32 +1,31 @@
 # jobsworth-installer
-Jobsworth installer and migrator from ClockingIT
+[Jobsworth](https://github.com/ari/jobsworth) installer and migrator from hosted [ClockingIT](http://www.clockingit.com/)
 
-This project has the purpose of helping you install jobsworth in an Ubuntu and Ubuntu Server OS, and also to help you migrate from the hosted verion of clockingIT.
+This project has the purpose of helping you install [jobsworth](https://github.com/ari/jobsworth) in an Ubuntu and Ubuntu Server OS, and also to help you migrate from the hosted verion of [ClockingIT](http://www.clockingit.com/)
 
-At the moment the instructions are very raw, and the migration script might be unstable so be careful using it.
+At the moment the instructions are very raw, and the migration script might be unstable so be careful using it. You can choos to make an automatic install with the provided scripts or a Manual install following the steps detailed below.
 
-## Installation of Jobsworth by scripts
-You can install Jobsworth and also migrate your data if you wish, by using the scripts provided.
+## Automatic Installation of Jobsworth
+You can install Jobsworth and also migrate your data if you wish, by using the scripts provided in this project.
 The scripts will try to download and install everything you need.
 
 All this scripts have been tested ONLY on new installations of both Ubuntu Server and Desktop 16.10
 
-There's also a VM ready to try if you wish to download it from [Dropbox](http://bit.ly/2niDqXL): 
+There's also a VirtualBox VM ready to try if you wish to download it from [Dropbox](http://bit.ly/2niDqXL) with the instructions to use it [here](https://github.com/frank-orellana/jobsworth/releases): 
 
-### Instructions
+### Instructions for automatic Install And/Or Data migration
 1. Download the full project
-1. Extract the file
-1. Copy the all the files to a folder IN your server
+1. Extract the files to a folder IN your server
 1. Move to the `jobsworth-installer` directory
-1. For installation execute the file: `sudo install-jobsworth-from-scratch.sh`. The script will
+1. For **Installation** execute the file: `sudo install-jobsworth-from-scratch.sh`. The script will **automatically**:
     1. Download and install MySql (It will ask you to set the root password)
     1. Create a new database named `jobsworth` and a user named `jw`
     1. Download, Install and configure Java and Tomcat9
         1. You will be able to access http://your-ip:8080/, http://your-ip:8080/host-manager and http://your-ip:8080/host-manager with the user and password `jobsworth` from your os and local network.
-        2. The installation path will be /opt/tomcat. For mor details see the script
-    4. Download, install and configure Jobsworth
-        1. After the installation is complete you can access jobsworth through http://your-ip:8080/ with the user: `admin` and password: `password`. It might take a while the first time
-1. For data migration execute the file `./migration-from-hosted/migrate-from-hosted.sh` passing as first argument yor backup file
+        2. The installation path will be /opt/tomcat. For more details see the script
+    1. Download, install and configure Jobsworth
+    1. After the installation is complete you can access jobsworth through http://your-ip:8080/ with the user: `admin` and password: `password`. It might take a while the first time
+1. For **Data Migration** execute the file `./migration-from-hosted/migrate-from-hosted.sh` passing as first argument yor backup file
     1. This will import all the data from a backup taken from your hosted version
     1. To see the full details see the [Migration Guide](https://github.com/frank-orellana/jobsworth-installer/tree/master/migration-from-hosted)
 
