@@ -26,7 +26,12 @@ popd > /dev/null
 logfile="$mydir/install.log"
 echo "* logfile: $logfile"
 
-if sudo -S -p '' echo -n < /dev/null 2> /dev/null; then echo '* Starting process...' | tee $logfile ; else echo 'ERROR: You dont have sudo rights. Execute the file like this: sudo install-jobsworth-from-scratch.sh' | tee $logfile ; exit ; fi
+if (( $EUID != 0 )); then
+    echo 'ERROR: You dont have sudo rights. Execute the file like this: sudo install-jobsworth-from-scratch.sh' | tee $logfile
+    exit
+else
+	echo '* Starting process...' | tee $logfile ;
+fi
 
 echo "* Updating repositories..."
 apt-get -qq update
@@ -56,7 +61,6 @@ if [ -z "$JHF" ]; then echo "* ERROR: JAVA_HOME Not Found. Exiting" | tee -a $lo
 
 groupadd tomcat
 useradd -s /bin/false -g tomcat -d /opt/tomcat tomcat
-usermod -a -G tomcat $USER 
 
 cd /tmp
 
@@ -86,23 +90,10 @@ find . -type f -exec chmod 664 -- {} +
 
 cd $mydir
 
-echo "* Configuring TOMCAT SERVICE" | tee -a $logfile
-sed "s|{YOUR_JAVA_HOME}|$JHF|g" installer-resources/tomcat.service.ini > /etc/systemd/system/tomcat.service
-cp installer-resources/tomcat-context.xml /opt/tomcat/conf/context.xml
-cp installer-resources/tomcat-users.xml /opt/tomcat/conf/
-cp installer-resources/tomcat-managers-context.xml /opt/tomcat/webapps/manager/META-INF/context.xml
-cp installer-resources/tomcat-managers-context.xml /opt/tomcat/webapps/host-manager/META-INF/context.xml
+chmod +x installer-resources/configure-tomcat.sh
+installer-resources/configure-tomcat.sh
 
-systemctl daemon-reload
-systemctl start tomcat
-systemctl enable tomcat
 
-sudo ufw allow 8080
-
-echo "* TOMCAT STATUS:" | tee -a $logfile
-systemctl status tomcat | grep Active: | tee -a $logfile
-echo
-echo "******************************************************************************"
 echo "* TOMCAT has been installed. Please check its installation visiting http://localhost:8008 OR HTTP://<THIS_COMPUTER_IP>:8080 before continuing"
 read -n 1 -s -p "Press ENTER to continue"
 echo
