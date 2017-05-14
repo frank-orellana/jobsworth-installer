@@ -14,7 +14,7 @@ v0.3.0
 Tested with:
 Ubuntu: Server 16.10, Debian: 8.8
 Jobsworth: 5.0 beta 2
-MySql: mariadb-server 10.0.25
+MySql: mariadb-server 10.0.29
 Java JDK: java-1.8.0-openjdk-amd64
 Tomcat: v8.5.15
 

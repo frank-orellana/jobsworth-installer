@@ -34,7 +34,7 @@ else
 fi
 
 if [ -z "$NO_UPD_REP" ]; then
-	echo "* Updating repositories..." | tee $logfile
+	echo "* Updating repositories..." | tee -a $logfile
 	apt-get -qq update
 fi
 
@@ -48,7 +48,7 @@ if [ -z "$NO_DB_SERVER" ]; then
 	echo "** Downloading..."
 	apt-get -qqy install mariadb-server | tee -a $logfile
 else
-	echo "** DB Server installation skipped" | tee $logfile
+	echo "** DB Server installation skipped" | tee -a $logfile
 fi
 
 if [ -z "$NO_DB" ]; then
@@ -60,7 +60,7 @@ if [ -z "$NO_DB" ]; then
 	echo "** Jobsworth database created. To access it you can type 'mysql -u jobsworth -p'" | tee -a $logfile
 	echo "******************************************************************************"
 else
-	echo "** DB creation skipped" | tee $logfile
+	echo "** DB creation skipped" | tee -a $logfile
 fi
 
 echo
@@ -103,7 +103,7 @@ if [ -z "$NO_JDK" ]; then
 		JHF=$JHF/jre
 	fi
 else
-	echo "** JDK Installation skipped" | tee $logfile
+	echo "** JDK Installation skipped" | tee -a $logfile
 fi
 
 if [ -z "$NO_TOMCAT" ]; then
