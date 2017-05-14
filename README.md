@@ -15,8 +15,8 @@ To download the script and execute you have all you have to do is execute the fo
 wget https://github.com/frank-orellana/jobsworth-installer/archive/v0.3.0.tar.gz
 tar xzf v0.3.0.tar.gz
 cd jobsworth-installer-0.3.0
-chmod +x install-jobsworth-from-scratch.sh
-sudo install-jobsworth-from-scratch.sh
+chmod +x install-jobsworth.sh
+sudo ./install-jobsworth.sh
 ```
 
 Follow the steps on screen and when everything is finished without errors you will be able to access your brand new installation of jobsworth in http://your-ip:8080/ with the user: `admin` and password: `password`. It might take a while the first time.
@@ -24,7 +24,7 @@ Follow the steps on screen and when everything is finished without errors you wi
 <details>
   <summary>Detailed instructions and details for automatic Install</summary>
 
-All this scripts have been tested ONLY on new installations of both Ubuntu Server and Desktop 16.10
+All this scripts have been tested ONLY on new installations of Debian 8.8, Ubuntu 15.10, 16.04 and 16.10
 
 There's also a VirtualBox VM ready to try if you wish to download it from [Dropbox](http://bit.ly/2niDqXL) with the instructions to use it [here](https://github.com/frank-orellana/jobsworth/releases): 
 
@@ -32,8 +32,8 @@ There's also a VirtualBox VM ready to try if you wish to download it from [Dropb
 1. Download the full project
 1. Extract the files to a folder IN your server
 1. Move to the `jobsworth-installer` directory
-1. Make the file executable `chmod +x install-jobsworth-from-scratch.sh`
-1. For **Installation** execute the file: `sudo install-jobsworth-from-scratch.sh`. 
+1. Make the file executable `chmod +x install-jobsworth.sh`
+1. For **Installation** execute the file: `sudo ./install-jobsworth.sh`. 
 
 The script will **automatically**:
  1. Download and install MySql (It will ask you to set the root password)
@@ -49,9 +49,23 @@ The script will **automatically**:
 
 The scripts need to be executable. If they are not you will have to execute this before trying to execute them:
 ```sh
-chmod +x install-jobsworth-from-scratch.sh
+chmod +x install-jobsworth.sh
 chmod +x migration-from-hosted/migrate-from-hosted.sh
 ```
+
+### Parameters of the script:
+You can prevent parts of the script from executing like this:
+`sudo NOXX=1 NOYY=1 ./install-jobsworth.sh`
+
+The options you can prevent are:
+<table>
+<tr><th>OPTION</th><th>What it prevents</th></tr>
+<tr><td>NO_UPD_REP</td><td>The update of repositories (apt-get update) for example for when you are running the script a second time</td></tr>
+<tr><td>NO_DB_SERVER</td><td>The installation of mariadb-server</td></tr>
+<tr><td>NO_DB</td><td>The creation of the jobsworth database</td></tr>
+<tr><td>NO_JDK</td><td>The installation of openjdk-8-jdk</td></tr>
+<tr><td>NO_TOMCAT</td><td>Tomcat download and installation</td></tr>
+</table>
 
 </details>
 
@@ -66,7 +80,7 @@ The full steps can be found in [here](https://github.com/frank-orellana/jobswort
 Basically what you will do is:
 1. Install Ubuntu 15.10 or above
 2. Install and configure MariaDB (MySql)
-3. Install and configure Java JDK
+3. Install and configure Java JDK 8
 4. Install and configure Tomcat
 5. Install and configure the Jobsworth WAR file
 

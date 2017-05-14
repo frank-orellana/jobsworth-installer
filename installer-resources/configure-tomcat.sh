@@ -3,8 +3,9 @@ if [ -z "$logfile" ]; then
     mydir=`pwd`
     popd > /dev/null
 
-    logfile="$mydir/install.log"
-    logfile="configure-tomcat.log"
+    logfile="$mydir/configure-tomcat.log"
+	
+	echo "* logfile: $logfile"
 fi
 
 echo "* Configuring TOMCAT SERVICE" | tee -a $logfile
@@ -44,13 +45,18 @@ cp installer-resources/tomcat-managers-context.xml /opt/tomcat/webapps/manager/M
 cp installer-resources/tomcat-managers-context.xml /opt/tomcat/webapps/host-manager/META-INF/context.xml
 
 echo "* adding user $SUDO_USER to group tomcat" | tee -a $logfile
-usermod -a -G tomcat $SUDO_USER | tee -a $logfile
+if [ -z "$SUDO_USER" ]; then
+	echo "** WARNING: Current user could not be detected and added to group. Are you executing with root instead of sudo?" | tee -a $logfile
+else
+    usermod -a -G tomcat $SUDO_USER | tee -a $logfile
+fi
+
 
 systemctl daemon-reload
 systemctl start tomcat
 systemctl enable tomcat
 
-sudo ufw allow 8080
+ufw allow 8080
 
 echo "* TOMCAT STATUS:" | tee -a $logfile
 systemctl status tomcat | grep Active: | tee -a $logfile
