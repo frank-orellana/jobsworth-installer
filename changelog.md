@@ -1,3 +1,6 @@
+v0.3.1
+-Small tutorial and logging fixes
+
 v0.3.0
 -Updated and simplified installation instructions
 -Added support for debian 8.8
