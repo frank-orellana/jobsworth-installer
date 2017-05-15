@@ -10,11 +10,11 @@ You can install Jobsworth and also migrate your data if you wish, by using the s
 The scripts will try to download and install everything you need.
 
 ### Instructions
-To download the script and execute you have all you have to do is execute the following commands in the linux console:
+To download the script and execute all you have to do is execute the following commands in the linux console:
 ```sh
-wget https://github.com/frank-orellana/jobsworth-installer/archive/v0.3.0.tar.gz
-tar xzf v0.3.0.tar.gz
-cd jobsworth-installer-0.3.0
+wget https://github.com/frank-orellana/jobsworth-installer/archive/v0.3.1.tar.gz
+tar xzf v0.3.1.tar.gz
+cd jobsworth-installer-0.3.1
 chmod +x install-jobsworth.sh
 sudo ./install-jobsworth.sh
 ```

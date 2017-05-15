@@ -3,10 +3,12 @@ This guide shows you the steps to migrate from the hosted [clockingIT](http://ww
 
 ## AUTOMATIC MIGRATION
 1. Download the full project, extract it in a folder IN your server
-2. Go to the folder migration-from-hosted
-3. Execute the migrate-from-hosted.sh (You might need to make this file executable: `chmod 776 migrate-from-hosted.sh`)
+1. Go to the folder `jobsworth-installer/migration-from-hosted`
+1. Download the sql dump from the hosted version of ClockingIT
+1. Make the script executable `chmod +x migrate-from-hosted.sh`
+1. Run the script passing as a parameter the dump file name: <br>  `./migrate-from-hosted.sh my_dump_file.sql`
 
-The script will execute in steps (the same as below) asking you for your mysql root password. If you have any errors you can simply execute the scrpit again. It is recommended that the destination database is empty or almost empty (e.g. the example data only) so it does not present any problem.
+Follow the script instructions. it will execute in steps (the same as below) asking you for your mysql root password. If you have any errors you can simply execute the scrpit again. It is recommended that the destination database is empty or almost empty (e.g. the example data only) so it does not present any problem.
 
 ## MANUAL MIGRATION
 ### 1. Download the SQL scripts
