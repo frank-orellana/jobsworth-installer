@@ -97,7 +97,7 @@ For the migration you will need to:
 1. Go to the folder `jobsworth-installer/migration-from-hosted`
 1. Download the sql dump from the hosted version of ClockingIT
 1. Make the script executable `chmod +x migrate-from-hosted.sh`
-1. Run the script passing as a parameter the dump file name: <br>  `./migrate-from-hosted.sh my_dump_file.sql`
+1. Run the script as sudo passing as a parameter the dump file name: <br>  `sudo ./migrate-from-hosted.sh my_dump_file.sql`
 
 The full steps for the migration can be found [here](https://github.com/frank-orellana/jobsworth-installer/tree/master/migration-from-hosted)
 
