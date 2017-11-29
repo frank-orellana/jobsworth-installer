@@ -101,7 +101,7 @@ CREATE TABLE `dependencies` (
     `id` int(11),
     `task_id` int(11),
     /*`dependency_id` int(11), The dump only throws two columns for this table */
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY  (`id`,`task_id`)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 Drop Table If Exists `emails`;
