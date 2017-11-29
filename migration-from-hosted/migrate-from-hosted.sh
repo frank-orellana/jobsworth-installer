@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #This file is part of the jobsworth-installer program
 #https://github.com/frank-orellana/jobsworth-installer
 #Copyright (C) 2017  Franklin Orellana
