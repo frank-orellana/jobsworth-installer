@@ -99,8 +99,11 @@ For the migration you will need to:
 1. Make the script executable `chmod +x migrate-from-hosted.sh`
 1. Run the script as sudo passing as a parameter the dump file name: <br>  `sudo ./migrate-from-hosted.sh my_dump_file.sql`
 
+All user's passwords will be reset to 'jobsworth'
+
 The full steps for the migration can be found [here](https://github.com/frank-orellana/jobsworth-installer/tree/master/migration-from-hosted)
 
+There might be some errors in the dump file, this has nothing to do with the current installer, and these errors will have to be fixed if necessary to import correctly.
 
 ----
 
