@@ -19,6 +19,13 @@
 
 backup=$1
 
+if (( $EUID != 0 )); then
+    echo 'ERROR: You dont have sudo rights. Execute the file like this: sudo install-jobsworth-from-scratch.sh' | tee $logfile
+    exit
+else
+	echo '* Starting process...' | tee $logfile
+fi
+
 if [ -z "$backup" ]
   then
     echo You must specify a backup file:
@@ -37,7 +44,7 @@ echo Starting migration with file: $backup
 echo "******************************************************************************"
 echo Creating clockingit database to load backup
 echo
-echo Please enter your MySql root password
+echo Please enter your MySql root password (blank in some systems)
 mysql -u root -p < schema.sql
 echo
 echo Schema creation finalized. Please check if there has been any errors
@@ -47,7 +54,7 @@ echo
 echo "******************************************************************************"
 echo Loading backup into clockingit database
 echo
-echo Please enter your MySql root password
+echo Please enter your MySql root password (blank in some systems)
 mysql -u root -p clockingit < $backup
 echo
 echo Data loaded. Please check if there has been any errors
@@ -57,7 +64,7 @@ echo
 echo "******************************************************************************"
 echo Migrating data from database clockingit to jobsworth
 echo
-echo Please enter your MySql root password
+echo Please enter your MySql root password (blank in some systems)
 mysql -u root -p < data-migration.sql
 echo
 echo Schema creation finalized. Please check if there has been any
