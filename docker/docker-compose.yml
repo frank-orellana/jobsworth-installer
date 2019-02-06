@@ -1,0 +1,18 @@
+version: '2'
+
+services:
+
+  mariadb:
+    image: mariadb:latest
+    environment:
+      - MYSQL_DATABASE=jobsworth
+      - MYSQL_USER=jw
+      - MYSQL_PASSWORD=jobsworth
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+  jobsworth:
+    image: jobsworth:latest
+    ports: 
+      - '8080:8080'
+      - '443:443'
+    depends_on:
+      - mariadb
