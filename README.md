@@ -12,9 +12,9 @@ The scripts will try to download and install everything you need.
 ### Instructions
 To download the script and execute all you have to do is execute the following commands in the linux console:
 ```sh
-wget https://github.com/frank-orellana/jobsworth-installer/archive/v0.3.1.tar.gz
-tar xzf v0.3.1.tar.gz
-cd jobsworth-installer-0.3.1
+wget https://github.com/frank-orellana/jobsworth-installer/archive/master.tar.gz
+tar xzf master.tar.gz
+cd jobsworth-installer-master
 chmod +x install-jobsworth.sh
 sudo ./install-jobsworth.sh
 ```
@@ -93,14 +93,17 @@ Also there is a VM already configured if you prefer. You can download it from [d
 With these steps you should be able to migrate your projects, tasks, users and most of the data from the hosted version of ClockingIT to your installation of jobsworth. You need to have already installed jobsworth for this to work.
 ### Automatic migration steps
 For the migration you will need to:
-1. Download the full project, extract it in a folder IN your server
+1. Download the full project, extract it in a folder IN your server [instructions](#instructions)
 1. Go to the folder `jobsworth-installer/migration-from-hosted`
 1. Download the sql dump from the hosted version of ClockingIT
 1. Make the script executable `chmod +x migrate-from-hosted.sh`
-1. Run the script passing as a parameter the dump file name: <br>  `./migrate-from-hosted.sh my_dump_file.sql`
+1. Run the script as sudo passing as a parameter the dump file name: <br>  `sudo ./migrate-from-hosted.sh my_dump_file.sql`
+
+All user's passwords will be reset to 'jobsworth'
 
 The full steps for the migration can be found [here](https://github.com/frank-orellana/jobsworth-installer/tree/master/migration-from-hosted)
 
+There might be some errors in the dump file, this has nothing to do with the current installer, and these errors will have to be fixed if necessary to import correctly.
 
 ----
 

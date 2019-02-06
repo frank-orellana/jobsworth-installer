@@ -27,33 +27,35 @@ logfile="$mydir/install.log"
 echo "* logfile: $logfile"
 
 if (( $EUID != 0 )); then
-    echo 'ERROR: You dont have sudo rights. Execute the file like this: sudo install-jobsworth-from-scratch.sh' | tee $logfile
+    echo 'ERROR: You dont have sudo rights. Execute the file like this: sudo install-jobsworth.sh' | tee $logfile
     exit
 else
 	echo '* Starting process...' | tee $logfile
 fi
 
 if [ -z "$NO_UPD_REP" ]; then
-	echo "* Updating repositories..." | tee -a $logfile
+	echo "* Updating system repositories. This might take several minutes..." | tee -a $logfile
+	echo "* (If you prefer not to update, set the env variable NO_UPD_REP=1)"
 	apt-get -qq update
 fi
 
 if [ -z "$NO_DB_SERVER" ]; then
 	echo "* Installing mysql (MariaDB)" | tee -a $logfile
 
-	echo "**   If it is not already installed it will ask you for a new password for "
+	echo "**   If it is not already installed it might ask you for a new password for "
 	echo "**   the ROOT user. DON'T FORGET THAT PASSWORD!!!"
 	echo "**   It will be asked later to create the default database"
 	echo "**   If no password is requested the default password is blank"
-	echo "** Downloading..."
-	apt-get -qq -y install mariadb-server | tee -a $logfile
+	echo "**   (If you prefer not to install it, set the env variable NO_DB_SERVER=1)"
+	echo "** Downloading MariaDB..."
+	apt-get -qqy install mariadb-server | tee -a $logfile
 else
 	echo "** DB Server installation skipped" | tee -a $logfile
 fi
 
 if [ -z "$NO_DB" ]; then
 	echo "** Creating Jobsworth database."
-	echo "** Executing create-database.sql script... Enter mysql (MariaDB) root password:" | tee -a $logfile
+	echo "** Executing create-database.sql script... Enter mysql root password if asked" | tee -a $logfile
 	mysql -u root -p < installer-resources/create-database.sql
 	echo
 	echo "******************************************************************************"
@@ -119,7 +121,7 @@ if [ -z "$NO_TOMCAT" ]; then
 
 	echo "* Downloading TOMCAT..." | tee -a $logfile
 	cd $mydir
-	wget --continue -nv http://archive.apache.org/dist/tomcat/tomcat-8/v8.5.15/bin/apache-tomcat-8.5.15.tar.gz | tee -a $logfile
+	wget --continue -nv http://archive.apache.org/dist/tomcat/tomcat-8/v8.5.23/bin/apache-tomcat-8.5.23.tar.gz | tee -a $logfile
 
 	echo "* TOMCAT dowloaded" | tee -a $logfile
 
