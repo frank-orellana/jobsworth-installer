@@ -46,7 +46,7 @@ if [ -z "$NO_DB_SERVER" ]; then
 	echo "**   It will be asked later to create the default database"
 	echo "**   If no password is requested the default password is blank"
 	echo "** Downloading..."
-	apt-get -qqy install mariadb-server | tee -a $logfile
+	apt-get -qq -y install mariadb-server | tee -a $logfile
 else
 	echo "** DB Server installation skipped" | tee -a $logfile
 fi
@@ -66,11 +66,18 @@ fi
 echo
 
 if [ -z "$NO_JDK" ]; then
-	echo "* Installing JAVA" | tee -a $logfile
+	
+	if [ -z "$JDK" ]; then
+		echo "* Installing JAVA 8 JRE" | tee -a $logfile
+		jre=openjdk-8-jre
+	else
+		echo "* Installing JAVA 8 JDK" | tee -a $logfile
+		jre=openjdk-8-jdk
+	fi
 
 	JHF=$(update-java-alternatives -l | grep -o '/.*jvm/java-1.[89].*$')
 	if [ -z "$JHF" ]; then
-		java_available=$(apt-cache search openjdk-8-jdk)
+		java_available=$(apt-cache search $jre)
 		
 		if [ -z "$java_available" ]; then
 			echo "** JAVA package not available. Adding source http://http.debian.net/debian jessie-backports main" | tee -a $logfile
@@ -79,15 +86,15 @@ if [ -z "$NO_JDK" ]; then
 			apt-get -qq update
 			echo "** Repositories updated" | tee -a $logfile
 			
-			echo "** Installing java openjdk-8-jdk..." | tee -a $logfile
-			apt-get -qqy install -t jessie-backports  openjdk-8-jre-headless ca-certificates-java openjdk-8-jdk
+			echo "** Installing java $jre..." | tee -a $logfile
+			apt-get -qq -y install -t jessie-backports  openjdk-8-jre-headless ca-certificates-java $jre
 		else
-			echo "** openjdk-8-jdk is available to install"
-			echo "** Installing java openjdk-8-jdk..." | tee -a $logfile
-			apt-get -qqy install openjdk-8-jre-headless ca-certificates-java openjdk-8-jdk  | tee -a $logfile
+			echo "** $jre is available to install"
+			echo "** Installing java $jre..." | tee -a $logfile
+			apt-get -qq -y install openjdk-8-jre-headless ca-certificates-java $jre  | tee -a $logfile
 		fi
 		
-		echo "** openjdk-8-jdk installed..." | tee -a $logfile
+		echo "** $jre installed..." | tee -a $logfile
 
 		JHF=$(update-java-alternatives -l | grep -o '/.*jvm/java-1.[89].*$')
 		if [ -z "$JHF" ]; then 
@@ -99,11 +106,11 @@ if [ -z "$NO_JDK" ]; then
 			JHF=$JHF/jre
 		fi
 	else
-		echo "** JAVA JDK 8 or 9 is already installed in $JHF" | tee -a $logfile
+		echo "** JAVA JRE 8 or 9 is already installed in $JHF" | tee -a $logfile
 		JHF=$JHF/jre
 	fi
 else
-	echo "** JDK Installation skipped" | tee -a $logfile
+	echo "** JRE Installation skipped" | tee -a $logfile
 fi
 
 if [ -z "$NO_TOMCAT" ]; then

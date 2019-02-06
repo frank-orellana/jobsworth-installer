@@ -5,7 +5,7 @@ if [ -z "$logfile" ]; then
 
     logfile="$mydir/configure-tomcat.log"
 	
-	echo "* logfile: $logfile"
+	echo "* logfile: $logfile" 
 fi
 
 echo "* Configuring TOMCAT SERVICE" | tee -a $logfile
