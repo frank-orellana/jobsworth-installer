@@ -7,7 +7,7 @@ run:
 wget https://github.com/frank-orellana/jobsworth-installer/archive/master.tar.gz
 tar xzf master.tar.gz
 cd jobsworth-installer-master/docker
-docker-compose --build up
+docker-compose up --build -d
 ```
 
 Then wait for the required components to download and for jobsworth to be installd automatically, and the you will be able to access jobsworth through http://localhost:8080 or http://your-vm-ip:8080

@@ -11,6 +11,7 @@ services:
       - MYSQL_RANDOM_ROOT_PASSWORD=yes
   jobsworth:
     image: jobsworth:latest
+    build: .
     ports: 
       - '8080:8080'
       - '443:443'
