@@ -21,6 +21,15 @@ sudo ./install-jobsworth.sh
 
 Follow the steps on screen and when everything is finished without errors you will be able to access your brand new installation of jobsworth in http://your-ip:8080/ with the user: `admin` and password: `password`. It might take a while the first time.
 
+#### Compatible OS Versions:
+* Ubuntu: 15.10,16.04,16.10,18.04
+* Debian 8.8
+
+It might work on others debian based distros and in other ubuntu versions, I just have not tried them.
+
+## Docker install
+Follow the instructions in the [docker readme](./docker/README.md) file
+
 <details>
   <summary>Detailed instructions and details for automatic Install</summary>
 
