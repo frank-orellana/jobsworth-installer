@@ -461,12 +461,11 @@ CREATE TABLE `shouts` (
   PRIMARY KEY  (`id`)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-Drop Table If Exists `tags`;
-CREATE TABLE `tags` (
-    `id` int(11),
-    `company_id` int(11),
-    `name` varchar(255),
-  PRIMARY KEY  (`id`)
+Drop Table If Exists `task_tags`;
+CREATE TABLE `task_tags` (
+    `tag_id` int(11),
+    `task_id` int(11),
+  PRIMARY KEY  (`tag_id`,`task_id`)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 Drop Table If Exists `task_owners`;
